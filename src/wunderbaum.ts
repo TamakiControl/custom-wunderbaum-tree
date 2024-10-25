@@ -423,6 +423,11 @@ export class Wunderbaum {
       }
     });
 
+    util.onEvent(this.element, "contextmenu", (e) => {
+      const info = Wunderbaum.getEventInfo(e);
+      this._callEvent("contextmenu", { event: e, info: info });
+    });
+
     util.onEvent(this.element, "click", ".wb-button,.wb-col-icon", (e) => {
       const info = Wunderbaum.getEventInfo(e);
       const command = (<HTMLElement>e.target)?.dataset?.command;
