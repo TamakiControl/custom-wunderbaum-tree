@@ -194,6 +194,15 @@ export interface WbClickEventType extends WbTreeEventType {
   info: WbEventInfo;
 }
 
+export interface WbContextMenuEventType extends WbTreeEventType {
+  /** The original event. */
+  event: MouseEvent;
+  /** The clicked node if any. */
+  node: WunderbaumNode;
+  /** Additional information derived from the original mouse event. */
+  info: WbEventInfo;
+}
+
 export interface WbDeactivateEventType extends WbNodeEventType {
   nextNode: WunderbaumNode;
   /** The original event. */

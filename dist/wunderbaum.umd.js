@@ -294,7 +294,7 @@
     /*!
      * Wunderbaum - util
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.0, Sun, 04 Aug 2024 15:35:53 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 15:17:35 GMT (https://github.com/mar10/wunderbaum)
      */
     /** @module util */
     /** Readable names for `MouseEvent.button` */
@@ -986,6 +986,15 @@
         }
         throw new Error("No default boolean value provided");
     }
+    /**
+     * Return `val` unless `val` is a number in which case we convert to boolean.
+     * This is useful when a boolean value is stored as a 0/1 (e.g. in JSON) and
+     * we still want to maintain string values. null and undefined are returned as
+     * is. E.g. `checkbox` may be boolean or 'radio'.
+     */
+    function intToBool(val) {
+        return typeof val === "number" ? !!val : val;
+    }
     // /** Check if a string is contained in an Array or Set. */
     // export function isAnyOf(s: string, items: Array<string>|Set<string>): boolean {
     //   return Array.prototype.includes.call(items, s)
@@ -1114,6 +1123,7 @@
         extractHtmlText: extractHtmlText,
         getOption: getOption,
         getValueFromElem: getValueFromElem,
+        intToBool: intToBool,
         isArray: isArray,
         isEmptyObject: isEmptyObject,
         isFunction: isFunction,
@@ -1138,7 +1148,7 @@
     /*!
      * Wunderbaum - types
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.0, Sun, 04 Aug 2024 15:35:53 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 15:17:35 GMT (https://github.com/mar10/wunderbaum)
      */
     /**
      * Possible values for {@link WunderbaumNode.update} and {@link Wunderbaum.update}.
@@ -1202,7 +1212,7 @@
     /*!
      * Wunderbaum - wb_extension_base
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.0, Sun, 04 Aug 2024 15:35:53 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 15:17:35 GMT (https://github.com/mar10/wunderbaum)
      */
     class WunderbaumExtension {
         constructor(tree, id, defaults) {
@@ -1261,7 +1271,7 @@
     /*!
      * Wunderbaum - ext-filter
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.0, Sun, 04 Aug 2024 15:35:53 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 15:17:35 GMT (https://github.com/mar10/wunderbaum)
      */
     const START_MARKER = "\uFFF7";
     const END_MARKER = "\uFFF8";
@@ -1586,7 +1596,7 @@
     /*!
      * Wunderbaum - ext-keynav
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.0, Sun, 04 Aug 2024 15:35:53 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 15:17:35 GMT (https://github.com/mar10/wunderbaum)
      */
     const QUICKSEARCH_DELAY = 500;
     class KeynavExtension extends WunderbaumExtension {
@@ -1950,7 +1960,7 @@
     /*!
      * Wunderbaum - ext-logger
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.0, Sun, 04 Aug 2024 15:35:53 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 15:17:35 GMT (https://github.com/mar10/wunderbaum)
      */
     class LoggerExtension extends WunderbaumExtension {
         constructor(tree) {
@@ -1992,7 +2002,7 @@
     /*!
      * Wunderbaum - common
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.0, Sun, 04 Aug 2024 15:35:53 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 15:17:35 GMT (https://github.com/mar10/wunderbaum)
      */
     const DEFAULT_DEBUGLEVEL = 3; // Replaced by rollup script
     /**
@@ -2332,7 +2342,7 @@
     /*!
      * Wunderbaum - ext-dnd
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.0, Sun, 04 Aug 2024 15:35:53 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 15:17:35 GMT (https://github.com/mar10/wunderbaum)
      */
     const nodeMimeType = "application/x-wunderbaum-node";
     class DndExtension extends WunderbaumExtension {
@@ -2708,7 +2718,11 @@
                 }
                 this.lastAllowedDropRegions = regionSet;
                 this.lastDropEffect = dt.dropEffect;
+                const region = this._calcDropRegion(e, this.lastAllowedDropRegions);
                 targetNode.setClass("wb-drop-target");
+                targetNode.setClass("wb-drop-over", region === "over");
+                targetNode.setClass("wb-drop-before", region === "before");
+                targetNode.setClass("wb-drop-after", region === "after");
                 e.preventDefault(); // Allow drop (Drop operation is denied by default)
                 return false;
                 // --- dragover ---
@@ -2777,7 +2791,7 @@
     /*!
      * Wunderbaum - drag_observer
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.0, Sun, 04 Aug 2024 15:35:53 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 15:17:35 GMT (https://github.com/mar10/wunderbaum)
      */
     /**
      * Convert mouse- and touch events to 'dragstart', 'drag', and 'dragstop'.
@@ -2926,7 +2940,7 @@
     /*!
      * Wunderbaum - ext-grid
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.0, Sun, 04 Aug 2024 15:35:53 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 15:17:35 GMT (https://github.com/mar10/wunderbaum)
      */
     class GridExtension extends WunderbaumExtension {
         constructor(tree) {
@@ -3017,7 +3031,7 @@
     /*!
      * Wunderbaum - deferred
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.0, Sun, 04 Aug 2024 15:35:53 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 15:17:35 GMT (https://github.com/mar10/wunderbaum)
      */
     /**
      * Implement a ES6 Promise, that exposes a resolve() and reject() method.
@@ -3070,7 +3084,7 @@
     /*!
      * Wunderbaum - wunderbaum_node
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.0, Sun, 04 Aug 2024 15:35:53 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 15:17:35 GMT (https://github.com/mar10/wunderbaum)
      */
     /** WunderbaumNode properties that can be passed with source data.
      * (Any other source properties will be stored as `node.data.PROP`.)
@@ -3098,6 +3112,20 @@
     const NODE_DICT_PROPS = new Set(NODE_PROPS);
     NODE_DICT_PROPS.delete("_partsel");
     NODE_DICT_PROPS.delete("unselectable");
+    // /** Node properties that are of type bool (or boolean & string).
+    //  *  When parsing, we accept 0 for false and 1 for true for better JSON compression.
+    //  */
+    // export const NODE_BOOL_PROPS: Set<string> = new Set([
+    //   "checkbox",
+    //   "colspan",
+    //   "expanded",
+    //   "icon",
+    //   "iconTooltip",
+    //   "radiogroup",
+    //   "selected",
+    //   "tooltip",
+    //   "unselectable",
+    // ]);
     /**
      * A single tree node.
      *
@@ -3139,20 +3167,26 @@
             this.parent = parent;
             this.key = "" + ((_a = data.key) !== null && _a !== void 0 ? _a : ++WunderbaumNode.sequence);
             this.title = "" + ((_b = data.title) !== null && _b !== void 0 ? _b : "<" + this.key + ">");
+            this.expanded = !!data.expanded;
+            this.lazy = !!data.lazy;
+            // We set the following node properties only if a matching data value is
+            // passed
             data.refKey != null ? (this.refKey = "" + data.refKey) : 0;
             data.type != null ? (this.type = "" + data.type) : 0;
-            this.expanded = data.expanded === true;
-            data.icon != null ? (this.icon = data.icon) : 0;
-            this.lazy = data.lazy === true;
+            data.icon != null ? (this.icon = intToBool(data.icon)) : 0;
+            data.tooltip != null ? (this.tooltip = intToBool(data.tooltip)) : 0;
+            data.iconTooltip != null
+                ? (this.iconTooltip = intToBool(data.iconTooltip))
+                : 0;
             data.statusNodeType != null
                 ? (this.statusNodeType = ("" + data.statusNodeType))
                 : 0;
             data.colspan != null ? (this.colspan = !!data.colspan) : 0;
             // Selection
-            data.checkbox != null ? (this.checkbox = !!data.checkbox) : 0;
+            data.checkbox != null ? intToBool(data.checkbox) : 0;
             data.radiogroup != null ? (this.radiogroup = !!data.radiogroup) : 0;
-            this.selected = data.selected === true;
-            data.unselectable === true ? (this.unselectable = true) : 0;
+            data.selected != null ? (this.selected = !!data.selected) : 0;
+            data.unselectable != null ? (this.unselectable = !!data.unselectable) : 0;
             if (data.classes) {
                 this.setClass(data.classes);
             }
@@ -3981,8 +4015,8 @@
             let elap = 0, elapLoad = 0, elapProcess = 0;
             // Check for overlapping requests
             if (this._requestId) {
-                this.logWarn(`Recursive load request #${requestId} while #${this._requestId} is pending.`);
-                // 	node.debug("Send load request #" + requestId);
+                this.logWarn(`Recursive load request #${requestId} while #${this._requestId} is pending. ` +
+                    "The previous request will be ignored.");
             }
             this._requestId = requestId;
             // const timerLabel = tree.logTime(this + ".load()");
@@ -5438,6 +5472,21 @@
                     av = a.data[propName];
                     bv = b.data[propName];
                 }
+                if (av == null && bv == null) {
+                    return 0;
+                }
+                if (av == null) {
+                    av = typeof bv === "string" ? "" : 0;
+                }
+                else if (typeof av === "boolean") {
+                    av = av ? 1 : 0;
+                }
+                if (bv == null) {
+                    bv = typeof av === "string" ? "" : 0;
+                }
+                else if (typeof bv === "boolean") {
+                    bv = bv ? 1 : 0;
+                }
                 if (caseInsensitive) {
                     if (typeof av === "string") {
                         av = av.toLowerCase();
@@ -5561,7 +5610,7 @@
     /*!
      * Wunderbaum - ext-edit
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.0, Sun, 04 Aug 2024 15:35:53 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 15:17:35 GMT (https://github.com/mar10/wunderbaum)
      */
     // const START_MARKER = "\uFFF7";
     class EditExtension extends WunderbaumExtension {
@@ -5723,6 +5772,10 @@
             const validity = this.getPluginOption("validity");
             const select = this.getPluginOption("select");
             if (!node) {
+                return;
+            }
+            if (node.isStatusNode()) {
+                node.logWarn("Cannot edit status node.");
                 return;
             }
             this.tree.logDebug(`startEditTitle(node=${node})`);
@@ -5892,8 +5945,8 @@
      * https://github.com/mar10/wunderbaum
      *
      * Released under the MIT license.
-     * @version v0.11.0
-     * @date Sun, 04 Aug 2024 15:35:53 GMT
+     * @version v0.11.1-0
+     * @date Fri, 25 Oct 2024 15:17:35 GMT
      */
     // import "./wunderbaum.scss";
     class WbSystemRoot extends WunderbaumNode {
@@ -6161,6 +6214,13 @@
                 this.update(ChangeType.resize);
             });
             this.resizeObserver.observe(this.element);
+            onEvent(this.nodeListElement, "contextmenu", (e) => {
+                const info = Wunderbaum.getEventInfo(e);
+                const node = info.node;
+                if (node) {
+                    this._callEvent("contextmenu", { event: e, node: node, info: info });
+                }
+            });
             onEvent(this.element, "click", ".wb-button,.wb-col-icon", (e) => {
                 var _a, _b;
                 const info = Wunderbaum.getEventInfo(e);
@@ -8206,7 +8266,7 @@
     }
     Wunderbaum.sequence = 0;
     /** Wunderbaum release version number "MAJOR.MINOR.PATCH". */
-    Wunderbaum.version = "v0.11.0"; // Set to semver by 'grunt release'
+    Wunderbaum.version = "v0.11.1-0"; // Set to semver by 'grunt release'
     /** Expose some useful methods of the util.ts module as `Wunderbaum.util`. */
     Wunderbaum.util = util;
 

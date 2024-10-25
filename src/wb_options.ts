@@ -24,6 +24,7 @@ import {
   WbCancelableEventResultType,
   WbChangeEventType,
   WbClickEventType,
+  WbContextMenuEventType,
   WbDeactivateEventType,
   WbErrorEventType,
   WbExpandEventType,
@@ -316,6 +317,12 @@ export interface WunderbaumOptions {
    * @category Callback
    */
   dblclick?: (e: WbClickEventType) => WbCancelableEventResultType;
+  /**
+   * `e.node` was right-clicked.
+   * Return `false` to prevent default behavior, e.g. showing the context menu.
+   * @category Callback
+   */
+  contextmenu?: (e: WbContextMenuEventType) => WbCancelableEventResultType;
   /**
    * `e.node` was deactivated.
    *

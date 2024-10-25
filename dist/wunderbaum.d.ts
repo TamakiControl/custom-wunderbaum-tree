@@ -396,6 +396,13 @@ declare module "util" {
      * ```
      */
     export function toBool(...boolDefaults: (boolean | undefined | null)[]): boolean;
+    /**
+     * Return `val` unless `val` is a number in which case we convert to boolean.
+     * This is useful when a boolean value is stored as a 0/1 (e.g. in JSON) and
+     * we still want to maintain string values. null and undefined are returned as
+     * is. E.g. `checkbox` may be boolean or 'radio'.
+     */
+    export function intToBool(val: boolean | number | string | undefined): boolean | string | undefined;
     /** Return a canonical string representation for an object's type (e.g. 'array', 'number', ...). */
     export function type(obj: any): string;
     /**
@@ -588,7 +595,9 @@ declare module "wb_node" {
          */
         type?: string;
         /** Tooltip definition (`true`: use node's title). */
-        tooltip?: string | boolean;
+        tooltip?: TooltipOption;
+        /** Icon tooltip definition (`true`: use node's title). */
+        iconTooltip?: TooltipOption;
         /** Additional classes added to `div.wb-row`.
          * @see {@link hasClass}, {@link setClass}. */
         classes: Set<string> | null;
@@ -1099,7 +1108,7 @@ declare module "wb_options" {
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
      * @VERSION, @DATE (https://github.com/mar10/wunderbaum)
      */
-    import { ColumnDefinitionList, DndOptionsType, DynamicBoolOption, DynamicBoolOrStringOption, DynamicCheckboxOption, DynamicIconOption, EditOptionsType, FilterOptionsType, NavModeEnum, NodeTypeDefinitionMap, SelectModeType, WbActivateEventType, WbButtonClickEventType, WbCancelableEventResultType, WbChangeEventType, WbClickEventType, WbDeactivateEventType, WbErrorEventType, WbExpandEventType, WbIconBadgeCallback, WbIconBadgeEventResultType, WbInitEventType, WbKeydownEventType, WbNodeData, WbNodeEventType, WbReceiveEventType, WbRenderEventType, WbSelectEventType, WbTreeEventType } from "types";
+    import { ColumnDefinitionList, DndOptionsType, DynamicBoolOption, DynamicBoolOrStringOption, DynamicCheckboxOption, DynamicIconOption, EditOptionsType, FilterOptionsType, NavModeEnum, NodeTypeDefinitionMap, SelectModeType, WbActivateEventType, WbButtonClickEventType, WbCancelableEventResultType, WbChangeEventType, WbClickEventType, WbContextMenuEventType, WbDeactivateEventType, WbErrorEventType, WbExpandEventType, WbIconBadgeCallback, WbIconBadgeEventResultType, WbInitEventType, WbKeydownEventType, WbNodeData, WbNodeEventType, WbReceiveEventType, WbRenderEventType, WbSelectEventType, WbTreeEventType } from "types";
     /**
      * Available options for {@link wunderbaum.Wunderbaum}.
      *
@@ -1356,6 +1365,12 @@ declare module "wb_options" {
          */
         dblclick?: (e: WbClickEventType) => WbCancelableEventResultType;
         /**
+         * `e.node` was right-clicked.
+         * Return `false` to prevent default behavior, e.g. showing the context menu.
+         * @category Callback
+         */
+        contextmenu?: (e: WbContextMenuEventType) => WbCancelableEventResultType;
+        /**
          * `e.node` was deactivated.
          *
          * Return `false` to prevent default handling, e.g. deactivating the node
@@ -1552,7 +1567,7 @@ declare module "types" {
         colspan?: boolean;
         expanded?: boolean;
         icon?: IconOption;
-        iconTooltip?: boolean | string;
+        iconTooltip?: TooltipOption;
         key?: string;
         lazy?: boolean;
         /** Make child nodes single-select radio buttons. */
@@ -1561,7 +1576,7 @@ declare module "types" {
         selected?: boolean;
         statusNodeType?: NodeStatusType;
         title: string;
-        tooltip?: boolean | string;
+        tooltip?: TooltipOption;
         type?: string;
         unselectable?: boolean;
         /** @internal */
@@ -1608,6 +1623,14 @@ declare module "types" {
         inputValid: boolean;
     }
     export interface WbClickEventType extends WbTreeEventType {
+        /** The original event. */
+        event: MouseEvent;
+        /** The clicked node if any. */
+        node: WunderbaumNode;
+        /** Additional information derived from the original mouse event. */
+        info: WbEventInfo;
+    }
+    export interface WbContextMenuEventType extends WbTreeEventType {
         /** The original event. */
         event: MouseEvent;
         /** The clicked node if any. */
@@ -1737,8 +1760,8 @@ declare module "types" {
         colspan?: boolean;
         /** Default icon for matching nodes. */
         icon?: IconOption;
-        /** Default icon for matching nodes. */
-        iconTooltip?: string | boolean;
+        /** Default icon tooltip for matching nodes. */
+        iconTooltip?: TooltipOption;
         [key: string]: unknown;
     }
     export type NodeTypeDefinitionMap = {
