@@ -294,7 +294,7 @@
     /*!
      * Wunderbaum - util
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.1-0, Fri, 25 Oct 2024 21:05:01 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 21:20:48 GMT (https://github.com/mar10/wunderbaum)
      */
     /** @module util */
     /** Readable names for `MouseEvent.button` */
@@ -1148,7 +1148,7 @@
     /*!
      * Wunderbaum - types
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.1-0, Fri, 25 Oct 2024 21:05:01 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 21:20:48 GMT (https://github.com/mar10/wunderbaum)
      */
     /**
      * Possible values for {@link WunderbaumNode.update} and {@link Wunderbaum.update}.
@@ -1212,7 +1212,7 @@
     /*!
      * Wunderbaum - wb_extension_base
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.1-0, Fri, 25 Oct 2024 21:05:01 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 21:20:48 GMT (https://github.com/mar10/wunderbaum)
      */
     class WunderbaumExtension {
         constructor(tree, id, defaults) {
@@ -1271,7 +1271,7 @@
     /*!
      * Wunderbaum - ext-filter
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.1-0, Fri, 25 Oct 2024 21:05:01 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 21:20:48 GMT (https://github.com/mar10/wunderbaum)
      */
     const START_MARKER = "\uFFF7";
     const END_MARKER = "\uFFF8";
@@ -1596,7 +1596,7 @@
     /*!
      * Wunderbaum - ext-keynav
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.1-0, Fri, 25 Oct 2024 21:05:01 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 21:20:48 GMT (https://github.com/mar10/wunderbaum)
      */
     const QUICKSEARCH_DELAY = 500;
     class KeynavExtension extends WunderbaumExtension {
@@ -1960,7 +1960,7 @@
     /*!
      * Wunderbaum - ext-logger
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.1-0, Fri, 25 Oct 2024 21:05:01 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 21:20:48 GMT (https://github.com/mar10/wunderbaum)
      */
     class LoggerExtension extends WunderbaumExtension {
         constructor(tree) {
@@ -2002,7 +2002,7 @@
     /*!
      * Wunderbaum - common
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.1-0, Fri, 25 Oct 2024 21:05:01 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 21:20:48 GMT (https://github.com/mar10/wunderbaum)
      */
     const DEFAULT_DEBUGLEVEL = 3; // Replaced by rollup script
     /**
@@ -2342,7 +2342,7 @@
     /*!
      * Wunderbaum - ext-dnd
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.1-0, Fri, 25 Oct 2024 21:05:01 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 21:20:48 GMT (https://github.com/mar10/wunderbaum)
      */
     const nodeMimeType = "application/x-wunderbaum-node";
     class DndExtension extends WunderbaumExtension {
@@ -2791,7 +2791,7 @@
     /*!
      * Wunderbaum - drag_observer
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.1-0, Fri, 25 Oct 2024 21:05:01 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 21:20:48 GMT (https://github.com/mar10/wunderbaum)
      */
     /**
      * Convert mouse- and touch events to 'dragstart', 'drag', and 'dragstop'.
@@ -2940,7 +2940,7 @@
     /*!
      * Wunderbaum - ext-grid
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.1-0, Fri, 25 Oct 2024 21:05:01 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 21:20:48 GMT (https://github.com/mar10/wunderbaum)
      */
     class GridExtension extends WunderbaumExtension {
         constructor(tree) {
@@ -3031,7 +3031,7 @@
     /*!
      * Wunderbaum - deferred
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.1-0, Fri, 25 Oct 2024 21:05:01 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 21:20:48 GMT (https://github.com/mar10/wunderbaum)
      */
     /**
      * Implement a ES6 Promise, that exposes a resolve() and reject() method.
@@ -3084,7 +3084,7 @@
     /*!
      * Wunderbaum - wunderbaum_node
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.1-0, Fri, 25 Oct 2024 21:05:01 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 21:20:48 GMT (https://github.com/mar10/wunderbaum)
      */
     /** WunderbaumNode properties that can be passed with source data.
      * (Any other source properties will be stored as `node.data.PROP`.)
@@ -5610,7 +5610,7 @@
     /*!
      * Wunderbaum - ext-edit
      * Copyright (c) 2021-2024, Martin Wendt. Released under the MIT license.
-     * v0.11.1-0, Fri, 25 Oct 2024 21:05:01 GMT (https://github.com/mar10/wunderbaum)
+     * v0.11.1-0, Fri, 25 Oct 2024 21:20:48 GMT (https://github.com/mar10/wunderbaum)
      */
     // const START_MARKER = "\uFFF7";
     class EditExtension extends WunderbaumExtension {
@@ -5946,7 +5946,7 @@
      *
      * Released under the MIT license.
      * @version v0.11.1-0
-     * @date Fri, 25 Oct 2024 21:05:01 GMT
+     * @date Fri, 25 Oct 2024 21:20:48 GMT
      */
     // import "./wunderbaum.scss";
     class WbSystemRoot extends WunderbaumNode {
@@ -6214,16 +6214,22 @@
                 this.update(ChangeType.resize);
             });
             this.resizeObserver.observe(this.element);
-            onEvent(this.nodeListElement, "contextmenu", (e) => {
+            // util.onEvent(this.nodeListElement, "contextmenu", (e) => {
+            //   const info = Wunderbaum.getEventInfo(e);
+            //   const node = info.node;
+            //   if (node) {
+            //     this._callEvent("contextmenu", { event: e, node: node, info: info });
+            //   }
+            // });
+            onEvent(this.element, "contextmenu", (e) => {
                 const info = Wunderbaum.getEventInfo(e);
                 const node = info.node;
                 if (node) {
                     this._callEvent("contextmenu", { event: e, node: node, info: info });
                 }
-            });
-            onEvent(this.element, "contextmenu", (e) => {
-                const info = Wunderbaum.getEventInfo(e);
-                this._callEvent("contextmenu", { event: e, info: info });
+                else {
+                    this._callEvent("contextmenu", { event: e, node: null, info: info });
+                }
             });
             onEvent(this.element, "click", ".wb-button,.wb-col-icon", (e) => {
                 var _a, _b;

@@ -415,17 +415,22 @@ export class Wunderbaum {
     });
     this.resizeObserver.observe(this.element);
 
-    util.onEvent(this.nodeListElement, "contextmenu", (e) => {
+    // util.onEvent(this.nodeListElement, "contextmenu", (e) => {
+    //   const info = Wunderbaum.getEventInfo(e);
+    //   const node = info.node;
+    //   if (node) {
+    //     this._callEvent("contextmenu", { event: e, node: node, info: info });
+    //   }
+    // });
+
+    util.onEvent(this.element, "contextmenu", (e) => {
       const info = Wunderbaum.getEventInfo(e);
       const node = info.node;
       if (node) {
         this._callEvent("contextmenu", { event: e, node: node, info: info });
+      } else {
+        this._callEvent("contextmenu", { event: e, node: null, info: info });
       }
-    });
-
-    util.onEvent(this.element, "contextmenu", (e) => {
-      const info = Wunderbaum.getEventInfo(e);
-      this._callEvent("contextmenu", { event: e, info: info });
     });
 
     util.onEvent(this.element, "click", ".wb-button,.wb-col-icon", (e) => {
