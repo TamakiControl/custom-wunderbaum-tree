@@ -12,7 +12,7 @@ export const DEFAULT_DEBUGLEVEL = 4; // Replaced by rollup script
 /**
  * Fixed height of a row in pixel. Must match the SCSS variable `$row-outer-height`.
  */
-export const ROW_HEIGHT = 22;
+export const ROW_HEIGHT = 32;
 /**
  * Fixed width of node icons in pixel. Must match the SCSS variable `$icon-outer-width`.
  */

@@ -37,17 +37,17 @@
   --wb-grid-color-grayscale: #dedede;
   --wb-filter-dim-color: #dedede;
   --wb-filter-submatch-color: #868581;
-  --wb-row-outer-height: 22px;
-  --wb-row-inner-height: 20px;
+  --wb-row-outer-height: 32px;
+  --wb-row-inner-height: 30px;
   --wb-row-padding-y: 1px;
   --wb-col-padding-x: 2px;
-  --wb-icon-outer-height: 20px;
+  --wb-icon-outer-height: 30px;
   --wb-icon-outer-width: 20px;
-  --wb-icon-height: 16px;
-  --wb-icon-width: 16px;
-  --wb-icon-padding-y: 2px;
-  --wb-icon-padding-x: 2px;
-  --wb-header-height: 22px;
+  --wb-icon-height: 18px;
+  --wb-icon-width: 18px;
+  --wb-icon-padding-y: 6px;
+  --wb-icon-padding-x: 1px;
+  --wb-header-height: 32px;
 }
 
 div.wunderbaum * {
@@ -61,7 +61,7 @@ div.wunderbaum {
   margin: 0;
   padding: 0;
   font-family: var(--wb-font-stack);
-  font-size: 14px;
+  font-size: 1rem;
   color: var(--wb-node-text-color);
   border: 2px solid var(--wb-border-color);
   border-radius: 4px;
@@ -373,16 +373,16 @@ div.wunderbaum div.wb-row.wb-drop-target .wb-node .wb-icon::after {
   z-index: 1000;
   content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAQCAMAAABA3o1rAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACKUExURe/v9/f39+//7+f35+f/79bW5wgIawwYd97e55Tnpc731rjA2d7350LOY1LWa7Xvvf///wAQcyAze97e773vxnuczgA5pQBCpdb33rXvxu//9whjxgBaxlKU1oOz5ABz3gB73tbn99bW1rXe/wCM9xiU997v/97e3gCc/xil/9bv/wic/+/3/wAAALM9X5QAAAAudFJOU////////////////////////////////////////////////////////////wCCj3NVAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAqUlEQVQoU6WQ2w6CMAxA54agsCHq1HlFBREv/f/fs1tHAoaoiedlbXrWtGXwhV8FNqAXuAi4DwkShmE0cgGIcSwCCgkSkrAxpEonot0DhQxJptFsbnOpdNdgsFh6VtYwyqzTmG+oijDY7hr22E4qY7QybeGQe46nsxP0Wwc3Q1GWl+qKec8MlqKubxX+xzV7tkDuD1+3d+heigT2zGx/hCMUeUj4wL8CwAsW1kqCTugMCwAAAABJRU5ErkJggg==);
   left: 0;
-  top: calc((22px - var(--wb-icon-height)) / 2);
+  top: calc((32px - var(--wb-icon-height)) / 2);
 }
 div.wunderbaum div.wb-row.wb-drop-target.wb-drop-before .wb-node .wb-icon::after,
 div.wunderbaum div.wb-row.wb-drop-target.wb-drop-after .wb-node .wb-icon::after {
   content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAQCAMAAACROYkbAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACNUExURe/v9/f39+//7+f35+f/79bW5wgIawwYd97e55Tnpc731rjA2d7350LOY1LWa7Xvvf///wAQcyAze97e773vxgAAAHuczgA5pQBCpdb33rXvxu//9whjxgBaxlKU1oOz5ABz3gB73tbn99bW1rXe/wCM9xiU997v/97e3gCc/xil/9bv/wic/+/3/wAAAParqS4AAAAvdFJOU/////////////////////////////////////////////////////////////8AWqU49wAAAAlwSFlzAAAOwwAADsMBx2+oZAAAALlJREFUOE/FktsSgiAQhglMS8WstKLzQTM77Ps/XguL16I208cFyzB8/LPAYCC/ErARzcCFx23pBgnGfjAxBYhpKDwq3SBB5DeGWCYz0SUDClIkmgeLpV7HMiNDbrbbYbBaWzbaoKTaJiHfQe5oYLA/NBwxTiyVyqTSghYwox4MTmfL5XozgqxjAtODoizv1QPXPXqgKer6WeH9+Iw9XgF5ve15/Q+6/SQSsE+q8yMcocoREgzg3wKAL4vrpBIKREShAAAAAElFTkSuQmCC);
   left: 0;
-  top: calc((22px - var(--wb-icon-height)) / 2 - 11px);
+  top: calc((32px - var(--wb-icon-height)) / 2 - 16px);
 }
 div.wunderbaum div.wb-row.wb-drop-target.wb-drop-after .wb-node .wb-icon::after {
-  top: calc((22px - var(--wb-icon-height)) / 2 + 11px);
+  top: calc((32px - var(--wb-icon-height)) / 2 + 16px);
 }
 div.wunderbaum.wb-rainbow i.wb-expander:nth-child(4n+1),
 div.wunderbaum.wb-rainbow i.wb-indent:nth-child(4n+1) {
@@ -538,7 +538,7 @@ i.wb-icon > span.wb-badge {
     background-position: 0 0;
   }
   100% {
-    background-position: 0 22px;
+    background-position: 0 32px;
   }
 }
 
